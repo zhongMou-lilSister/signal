@@ -14,6 +14,24 @@ def HC(image):
 			color[image[r][c][0]-1][image[r][c][1]-1][image[r][c][2]-1] += 1
 	#Calculate the saliency of each color
 	dist = np.zeros((12,12,12))
+	dif_b = np.zeros(12)
+	dif_g = np.zeros(12)
+	dif_r = np.zeros(12)
+	for b in range(12):
+		for cb in range(12):
+			dif_b[b] += np.sum(np.sum(color, axis = 2), axis = 1)[cb] * abs(b-cb)
+	for g in range(12):
+		for cg in range(12):
+			dif_g[g] += np.sum(np.sum(color, axis = 2), axis = 0)[cg] * abs(g-cg)
+	for r in range(12):
+		for cr in range(12):
+			dif_r[r] += np.sum(np.sum(color, axis = 0), axis = 0)[cr] * abs(r-cr)
+	for b in range(12):
+		for r in range(12):
+			for g in range(12):
+				dist[b][g][r] = dif_b[b] + dif_g[g] + dif_r[r]
+
+	'''
 	for b in range(12):
 		for g in range(12):
 			for r in range(12):
@@ -23,6 +41,7 @@ def HC(image):
 						for cr in range(12):
 							value += color[cb][cg][cr]*math.sqrt((b-cb)**2 + (g-cg)**2 + (r-cr)**2)
 				dist[b][g][r] = value
+	'''
 	#Renew the image with the saliency and normalize
 	image_result = np.zeros((row,col))
 	temp = np.zeros(3)

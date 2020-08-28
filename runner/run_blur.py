@@ -19,7 +19,7 @@ def main():
 
     img = cv2.imread(args.img, cv2.IMREAD_GRAYSCALE)
     now = time.strftime("%Y_%m_%d_%H_%M_%S")
-    cv2.imwrite(os.path.abspath('..')+"\\result\\blur\\o_"+now+".jpeg",img)
+    # cv2.imwrite(os.path.abspath('..')+"\\result\\blur\\o_"+now+".jpeg",img)
     if args.method == "FastMeanBlur" :
         start = time.time()
         result = FastMeanBlur.FastMeanBlur(img,(args.size,args.size))

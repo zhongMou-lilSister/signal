@@ -25,7 +25,6 @@ def LCSlow(img):
     for i in range(M):
         for j in range(N):
             result[i][j] = 0
-            
             for p in range(M):
                 for q in range(N):
                     if not (p == i and q == j):
